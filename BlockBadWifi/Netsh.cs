@@ -91,7 +91,7 @@ namespace BlockBadWifi
                     p.BeginOutputReadLine();
                     p.BeginErrorReadLine();
 
-                    p.WaitForExit(500);
+                    p.WaitForExit();
 
                     outputAndErrorLog.Append(output);
                     outputAndErrorLog.Append(error);
