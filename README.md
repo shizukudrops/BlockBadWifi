@@ -8,4 +8,4 @@
 ## 動作環境
 Windows7以上
 
-NET Framework 4.7.2
+.NET Framework 4.7.2
