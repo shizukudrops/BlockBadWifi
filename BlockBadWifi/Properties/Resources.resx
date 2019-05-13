@@ -165,16 +165,40 @@
   <data name="NetworkType" xml:space="preserve">
     <value>Network Type</value>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
   <data name="Property" xml:space="preserve">
     <value>Property</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="SharedKey" xml:space="preserve">
+    <value>Shared Key</value>
+  </data>
   <data name="SSID" xml:space="preserve">
     <value>SSID</value>
   </data>
   <data name="Unblock" xml:space="preserve">
     <value>Unblock</value>
+  </data>
+  <data name="WPA-Enterprise" xml:space="preserve">
+    <value>WPA-Enterprise</value>
+  </data>
+  <data name="WPA-Personal" xml:space="preserve">
+    <value>WPA-Personal</value>
+  </data>
+  <data name="WPA2-Enterprise" xml:space="preserve">
+    <value>WPA2-Enterprise</value>
+  </data>
+  <data name="WPA2-Personal" xml:space="preserve">
+    <value>WPA2-Personal</value>
   </data>
 </root>

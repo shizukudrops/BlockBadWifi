@@ -205,6 +205,33 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   None に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Other に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Property に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Property {
@@ -223,6 +250,15 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   Shared Key に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SharedKey {
+            get {
+                return ResourceManager.GetString("SharedKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   SSID に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SSID {
@@ -237,6 +273,42 @@ namespace BlockBadWifi.Properties {
         public static string Unblock {
             get {
                 return ResourceManager.GetString("Unblock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WPA-Enterprise に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WPA_Enterprise {
+            get {
+                return ResourceManager.GetString("WPA-Enterprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WPA-Personal に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WPA_Personal {
+            get {
+                return ResourceManager.GetString("WPA-Personal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WPA2-Enterprise に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WPA2_Enterprise {
+            get {
+                return ResourceManager.GetString("WPA2-Enterprise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WPA2-Personal に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WPA2_Personal {
+            get {
+                return ResourceManager.GetString("WPA2-Personal", resourceCulture);
             }
         }
     }
