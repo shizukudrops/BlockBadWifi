@@ -118,63 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Adhoc" xml:space="preserve">
-    <value>Ad Hoc</value>
+    <value>アドホック</value>
   </data>
   <data name="Authentication" xml:space="preserve">
-    <value>Authentication</value>
+    <value>認証</value>
   </data>
   <data name="Block" xml:space="preserve">
-    <value>Block</value>
+    <value>ブロック</value>
   </data>
   <data name="BlockedNetwork" xml:space="preserve">
-    <value>Blocked Network</value>
+    <value>ブロックされているネットワーク</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>キャンセル</value>
   </data>
   <data name="Debug" xml:space="preserve">
-    <value>Debug</value>
+    <value>デバッグ</value>
   </data>
   <data name="Encryption" xml:space="preserve">
-    <value>Encryption</value>
+    <value>暗号化</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>エラー</value>
   </data>
   <data name="Error_ChooseBlockNetwork" xml:space="preserve">
-    <value>Choose a network you are trying to block</value>
+    <value>ブロックするネットワークを選択してください</value>
   </data>
   <data name="Error_ChosseUnblockNetwork" xml:space="preserve">
-    <value>Choose a network you are trying to unblock</value>
+    <value>ブロック解除するネットワークを選択してください</value>
   </data>
   <data name="Error_FillAll" xml:space="preserve">
-    <value>Fill out all entires</value>
+    <value>すべての項目を入力してください</value>
   </data>
   <data name="Infrastructure" xml:space="preserve">
-    <value>Infrastructure</value>
+    <value>インフラストラクチャ</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Language</value>
+    <value>言語</value>
   </data>
   <data name="ManageManually" xml:space="preserve">
-    <value>Add/Delete Filter Manually</value>
+    <value>手動でフィルタを管理</value>
   </data>
   <data name="Network" xml:space="preserve">
-    <value>Network</value>
+    <value>ネットワーク</value>
   </data>
   <data name="NetworkType" xml:space="preserve">
-    <value>Network Type</value>
+    <value>ネットワークの種類</value>
   </data>
   <data name="Property" xml:space="preserve">
-    <value>Property</value>
+    <value>プロパティ</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Refresh</value>
+    <value>最新の情報に更新</value>
   </data>
   <data name="SSID" xml:space="preserve">
     <value>SSID</value>
   </data>
   <data name="Unblock" xml:space="preserve">
-    <value>Unblock</value>
+    <value>ブロックを解除</value>
   </data>
 </root>

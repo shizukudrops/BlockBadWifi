@@ -4,26 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlockBadWifi"
+        xmlns:properties="clr-namespace:BlockBadWifi.Properties"
         mc:Ignorable="d"
-        Title="手動でフィルタを編集" Height="200" Width="400">
+        Title="{x:Static properties:Resources.ManageManually}" Height="200" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <Label x:Name="label" Content="SSID" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label" Content="{x:Static properties:Resources.SSID}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="ssidTextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Padding="3" MinWidth="200"/>
-            <Label Content="ネットワークの種類" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+            <Label Content="{x:Static properties:Resources.NetworkType}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
             <ComboBox x:Name="networktypeComboBox" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="200">
-                <ComboBoxItem Content="インフラストラクチャ"></ComboBoxItem>
-                <ComboBoxItem Content="アドホック"></ComboBoxItem>
+                <ComboBoxItem Content="{x:Static properties:Resources.Infrastructure}"></ComboBoxItem>
+                <ComboBoxItem Content="{x:Static properties:Resources.Adhoc}"></ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0,10">
-            <Button x:Name="button" Content="ブロック" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="3" Width="100" Click="Button_Block_Click"/>
-            <Button x:Name="button1" Content="ブロック解除" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Padding="3" Click="Button_Unblock_Click"/>
-            <Button x:Name="button2" Content="キャンセル" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Padding="3" Click="Button_Cancel_Click"/>
+            <Button x:Name="button" Content="{x:Static properties:Resources.Block}" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="3" Width="100" Click="Button_Block_Click"/>
+            <Button x:Name="button1" Content="{x:Static properties:Resources.Unblock}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Padding="3" Click="Button_Unblock_Click"/>
+            <Button x:Name="button2" Content="{x:Static properties:Resources.Cancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Padding="3" Click="Button_Cancel_Click"/>
         </WrapPanel>
     </Grid>
 </Window>

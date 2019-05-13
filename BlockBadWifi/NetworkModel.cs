@@ -9,7 +9,7 @@ namespace BlockBadWifi
     public class NetworkModel
     {
         public string Ssid { get; set; }
-        public string NetworkType { get; set; }
+        public NetworkType NetworkType { get; set; }
         public string Authentication { get; set; }
         public string Encryption { get; set; }
 

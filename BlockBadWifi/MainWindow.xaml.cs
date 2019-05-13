@@ -50,7 +50,7 @@ namespace BlockBadWifi
         {
             if(networkList.SelectedItem == null)
             {
-                MessageBox.Show("ブロックするネットワークを選択してください", "エラー");
+                MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
                 return;
             }
             netsh.BlockNetwork((NetworkModel)networkList.SelectedItem);
@@ -62,7 +62,7 @@ namespace BlockBadWifi
         {
             if(userBlockList.SelectedItem == null)
             {
-                MessageBox.Show("ブロックを解除するネットワークを選択してください", "エラー");
+                MessageBox.Show(Properties.Resources.Error_ChosseUnblockNetwork, Properties.Resources.Error);
                 return;
             }
             netsh.UnblockNetwork((NetworkModel)userBlockList.SelectedItem);
@@ -121,7 +121,7 @@ namespace BlockBadWifi
             MessageBox.Show($@"{title.Name}
 {ver}
 {copyright.Copyright}
-Released under MIT Lisence", "プロパティ");
+Released under MIT Lisence", Properties.Resources.Property);
         }
 
         private void MenuItem_Debug_Click(object sender, RoutedEventArgs e)

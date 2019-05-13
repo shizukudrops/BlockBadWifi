@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BlockBadWifi"
+        xmlns:properties="clr-namespace:BlockBadWifi.Properties"
         mc:Ignorable="d"
         Title="BlockBadWifi" Height="450" Width="800">
     <Grid>
@@ -16,36 +17,36 @@
             <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
         <Menu x:Name="menu" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Height="auto" Width="auto" Padding="3" VerticalAlignment="Top">
-            <MenuItem Header="最新の情報に更新" Click="MenuItem_Refresh_Click"></MenuItem>
-            <MenuItem Header="手動でフィルタを編集" Click="MenuItem_ManageFilter_Click"></MenuItem>
-            <MenuItem Header="プロパティ" Click="MenuItem_Property_Click"></MenuItem>
-            <MenuItem x:Name="menuitem_debug" Header="デバッグ" Click="MenuItem_Debug_Click" Visibility="Hidden"></MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.Refresh}" Click="MenuItem_Refresh_Click"></MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.ManageManually}" Click="MenuItem_ManageFilter_Click"></MenuItem>
+            <MenuItem Header="{x:Static properties:Resources.Property}" Click="MenuItem_Property_Click"></MenuItem>
+            <MenuItem x:Name="menuitem_debug" Header="{x:Static properties:Resources.Debug}" Click="MenuItem_Debug_Click" Visibility="Hidden"></MenuItem>
         </Menu>
 
         <DockPanel Grid.Row="1" Grid.Column="0" Height="auto">
-        <Label DockPanel.Dock="top" Content="ネットワーク" Margin="10,0,0,0"></Label>
+            <Label DockPanel.Dock="top" Content="{x:Static properties:Resources.Network}" Margin="10,0,0,0"></Label>
             <ListView x:Name="networkList" Height="auto" Width="auto" Margin="10,0,10,10" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" UseLayoutRounding="False">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="SSID" DisplayMemberBinding="{Binding Path=Ssid}"/>
-                        <GridViewColumn Header="Authentication" DisplayMemberBinding="{Binding Path=Authentication}"/>
-                        <GridViewColumn Header="Encryption" DisplayMemberBinding="{Binding Path=Encryption}"/>
-                        <GridViewColumn Header="Network Type" DisplayMemberBinding="{Binding Path=NetworkType}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.SSID}" DisplayMemberBinding="{Binding Path=Ssid}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.Authentication}" DisplayMemberBinding="{Binding Path=Authentication}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.Encryption}" DisplayMemberBinding="{Binding Path=Encryption}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.NetworkType}" DisplayMemberBinding="{Binding Path=NetworkType}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="1">
             <WrapPanel DockPanel.Dock="top" Margin="0,5,0,0">
-                <Button x:Name="button" Content="ブロック" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="Button_Block_Click" Padding="1,3"/>
-                <Button x:Name="button1" Content="ブロックを解除" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="Button_Unblock_Click" Padding="1,3"/>
+                <Button x:Name="button" Content="{x:Static properties:Resources.Block}" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="Button_Block_Click" Padding="1,3"/>
+                <Button x:Name="button1" Content="{x:Static properties:Resources.Unblock}" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Click="Button_Unblock_Click" Padding="1,3"/>
             </WrapPanel>
-            <Label DockPanel.Dock="top" Content="ブロックしているネットワーク" Margin="10,0,0,0"></Label>
+            <Label DockPanel.Dock="top" Content="{x:Static properties:Resources.BlockedNetwork}" Margin="10,0,0,0"></Label>
             <ListView x:Name="userBlockList" DockPanel.Dock="Bottom"  Height="auto" Width="auto" Margin="10,0,10,10" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Center" UseLayoutRounding="False">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="SSID" DisplayMemberBinding="{Binding Path=Ssid}"/>
-                        <GridViewColumn Header="Network Type" DisplayMemberBinding="{Binding Path=NetworkType}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.SSID}" DisplayMemberBinding="{Binding Path=Ssid}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.NetworkType}" DisplayMemberBinding="{Binding Path=NetworkType}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

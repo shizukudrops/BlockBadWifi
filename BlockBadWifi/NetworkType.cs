@@ -8,6 +8,7 @@ namespace BlockBadWifi
 {
     public enum NetworkType
     {
+        None = -1,
         Infrastructure = 0,
         Adhoc = 1
     }

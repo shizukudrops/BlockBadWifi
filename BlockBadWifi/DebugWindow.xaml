@@ -9,7 +9,7 @@
         Activated="Window_Activated">
     <Grid>
         <TextBox x:Name="textBox" Margin="10,39,10,10" TextWrapping="Wrap" Text="" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="button" Content="更新" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" Click="Button_Click"/>
+        <Button x:Name="button" Content="Refresh" HorizontalAlignment="Left" Height="24" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" Click="Button_Click"/>
 
     </Grid>
 </Window>

@@ -22,7 +22,7 @@ namespace BlockBadWifi.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace BlockBadWifi.Properties {
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BlockBadWifi.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,192 @@ namespace BlockBadWifi.Properties {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ad Hoc に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Adhoc {
+            get {
+                return ResourceManager.GetString("Adhoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Authentication に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Authentication {
+            get {
+                return ResourceManager.GetString("Authentication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Block に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Block {
+            get {
+                return ResourceManager.GetString("Block", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Blocked Network に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string BlockedNetwork {
+            get {
+                return ResourceManager.GetString("BlockedNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cancel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Debug に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Debug {
+            get {
+                return ResourceManager.GetString("Debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Encryption に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Encryption {
+            get {
+                return ResourceManager.GetString("Encryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Error に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Choose a network you are trying to block に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error_ChooseBlockNetwork {
+            get {
+                return ResourceManager.GetString("Error_ChooseBlockNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Choose a network you are trying to unblock に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error_ChosseUnblockNetwork {
+            get {
+                return ResourceManager.GetString("Error_ChosseUnblockNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fill out all entires に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error_FillAll {
+            get {
+                return ResourceManager.GetString("Error_FillAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Infrastructure に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Infrastructure {
+            get {
+                return ResourceManager.GetString("Infrastructure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Language に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Add/Delete Filter Manually に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ManageManually {
+            get {
+                return ResourceManager.GetString("ManageManually", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Network に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Network Type に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string NetworkType {
+            get {
+                return ResourceManager.GetString("NetworkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Property に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Property {
+            get {
+                return ResourceManager.GetString("Property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Refresh に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   SSID に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SSID {
+            get {
+                return ResourceManager.GetString("SSID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Unblock に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Unblock {
+            get {
+                return ResourceManager.GetString("Unblock", resourceCulture);
             }
         }
     }

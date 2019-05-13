@@ -28,7 +28,7 @@ namespace BlockBadWifi
                                from networktype in token.Token().Text()
 
                                select new NetworkModel
-                               { Ssid = ssid, NetworkType = networktype };
+                               { Ssid = ssid, NetworkType = (NetworkType)Enum.Parse(typeof(NetworkType), networktype) };
 
             var parser = from head in header
                          from models in networkModel.Many()

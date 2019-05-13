@@ -36,20 +36,18 @@ namespace BlockBadWifi
             }
             catch (Exception)
             {
-                outputAndErrorLog.AppendLine("[WLanFilterManager]フィルタの標準出力のパースに失敗しました");
+                outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
             }
         }
 
         public void BlockNetwork(NetworkModel network)
         {
-            if (string.IsNullOrWhiteSpace(network.Ssid)) return;
             Execute($@"/c chcp {codePage} & netsh wlan add filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
             RefreshFilters();
         }
 
         public void UnblockNetwork(NetworkModel network)
         {
-            if(string.IsNullOrWhiteSpace(network.Ssid)) return;
             Execute($@"/c chcp {codePage} & netsh wlan delete filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
             RefreshFilters();
         }
@@ -99,7 +97,7 @@ namespace BlockBadWifi
             }
             catch (Exception)
             {
-                outputAndErrorLog.AppendLine("[WLanFilterManager]NetShellコマンドの実行で例外が発生しました");
+                outputAndErrorLog.AppendLine("[Exception]NetShellコマンドの実行で例外が発生しました");
             }   
         }
 

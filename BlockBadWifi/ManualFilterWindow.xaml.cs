@@ -29,13 +29,13 @@ namespace BlockBadWifi
 
         private void Button_Block_Click(object sender, RoutedEventArgs e)
         {
-            if(ssidTextBox.Text == "" || networktypeComboBox.Text == "")
+            if(string.IsNullOrWhiteSpace(ssidTextBox.Text) || networktypeComboBox.Text == "")
             {
-                MessageBox.Show("すべての項目を入力してください", "エラー");
+                MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
                 return;
             }
             var networkType = (NetworkType)networktypeComboBox.SelectedIndex;
-            Netsh.BlockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType.ToString() });
+            Netsh.BlockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
             MainWindow.CopyFilterList();
             MainWindow.RefreshNetworkList();
             Close();
@@ -43,13 +43,13 @@ namespace BlockBadWifi
 
         private void Button_Unblock_Click(object sender, RoutedEventArgs e)
         {
-            if (ssidTextBox.Text == "" || networktypeComboBox.Text == "")
+            if (string.IsNullOrWhiteSpace(ssidTextBox.Text) || networktypeComboBox.Text == "")
             {
-                MessageBox.Show("すべての項目を入力してください", "エラー");
+                MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
                 return;
             }
             var networkType = (NetworkType)networktypeComboBox.SelectedIndex;
-            Netsh.UnblockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType.ToString() });
+            Netsh.UnblockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
             MainWindow.CopyFilterList();
             MainWindow.RefreshNetworkList();
             Close();
