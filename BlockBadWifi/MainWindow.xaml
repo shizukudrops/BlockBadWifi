@@ -46,7 +46,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="{x:Static properties:Resources.SSID}" DisplayMemberBinding="{Binding Path=Ssid}"/>
-                        <GridViewColumn Header="{x:Static properties:Resources.NetworkType}" DisplayMemberBinding="{Binding Path=NetworkType}"/>
+                        <GridViewColumn Header="{x:Static properties:Resources.NetworkType}" DisplayMemberBinding="{Binding Path=NetworkTypeString}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

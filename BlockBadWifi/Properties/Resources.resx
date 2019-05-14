@@ -153,9 +153,6 @@
   <data name="Infrastructure" xml:space="preserve">
     <value>Infrastructure</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
   <data name="ManageManually" xml:space="preserve">
     <value>Add/Delete Filter Manually</value>
   </data>

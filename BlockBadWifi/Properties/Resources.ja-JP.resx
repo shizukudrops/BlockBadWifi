@@ -153,11 +153,8 @@
   <data name="Infrastructure" xml:space="preserve">
     <value>インフラストラクチャ</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>言語</value>
-  </data>
   <data name="ManageManually" xml:space="preserve">
-    <value>手動でフィルタを管理</value>
+    <value>手動でフィルタを編集</value>
   </data>
   <data name="Network" xml:space="preserve">
     <value>ネットワーク</value>
