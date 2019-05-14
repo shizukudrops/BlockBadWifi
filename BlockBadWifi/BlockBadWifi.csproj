@@ -99,6 +99,7 @@
     <Compile Include="Netsh.cs" />
     <Compile Include="NetworkModel.cs" />
     <Compile Include="NetworkType.cs" />
+    <Compile Include="NetworkViewModel.cs" />
     <Compile Include="Properties\Resources.ja-JP.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -201,4 +201,22 @@
   <data name="WPA2_Personal" xml:space="preserve">
     <value>WPA2-パーソナル</value>
   </data>
+  <data name="CCMP" xml:space="preserve">
+    <value>CCMP(AES)</value>
+  </data>
+  <data name="TKIP" xml:space="preserve">
+    <value>TKIP</value>
+  </data>
+  <data name="Undefined" xml:space="preserve">
+    <value>未定義</value>
+  </data>
+  <data name="WEP" xml:space="preserve">
+    <value>WEP</value>
+  </data>
+  <data name="WEP_104" xml:space="preserve">
+    <value>WEP(104ビット鍵)</value>
+  </data>
+  <data name="WEP_40" xml:space="preserve">
+    <value>WEP(40ビット鍵)</value>
+  </data>
 </root>

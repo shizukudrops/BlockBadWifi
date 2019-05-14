@@ -106,6 +106,15 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   CCMP(AES) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CCMP {
+            get {
+                return ResourceManager.GetString("CCMP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Debug に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Debug {
@@ -268,11 +277,56 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   TKIP に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TKIP {
+            get {
+                return ResourceManager.GetString("TKIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Unblock に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Unblock {
             get {
                 return ResourceManager.GetString("Unblock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Undefined に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Undefined {
+            get {
+                return ResourceManager.GetString("Undefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WEP に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WEP {
+            get {
+                return ResourceManager.GetString("WEP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WEP(104bit key) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WEP_104 {
+            get {
+                return ResourceManager.GetString("WEP_104", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   WEP(40bit key) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string WEP_40 {
+            get {
+                return ResourceManager.GetString("WEP_40", resourceCulture);
             }
         }
         

@@ -24,8 +24,8 @@ namespace BlockBadWifi
     {
         private Netsh netsh = new Netsh();
         private NativeWifiManager manager = new NativeWifiManager();
-        private ObservableCollection<NetworkModel> networks;
-        private ObservableCollection<NetworkModel> userBlockNetworks;
+        private ObservableCollection<NetworkViewModel> networks;
+        private ObservableCollection<NetworkViewModel> userBlockNetworks;
 
         public MainWindow()
         {
@@ -35,9 +35,9 @@ namespace BlockBadWifi
             menuitem_debug.Visibility = Visibility.Visible;
 #endif
 
-            networks = new ObservableCollection<NetworkModel>(manager.NetworkModels);
+            networks = new ObservableCollection<NetworkViewModel>(manager.NetworkModels.Select(n => new NetworkViewModel(n)));
             networkList.ItemsSource = networks;
-            userBlockNetworks = new ObservableCollection<NetworkModel>(netsh.UserBlockNetworks);
+            userBlockNetworks = new ObservableCollection<NetworkViewModel>(netsh.UserBlockNetworks.Select(n => new NetworkViewModel(n)));
             userBlockList.ItemsSource = userBlockNetworks;
 
             Loaded += async (s, e) => {
@@ -53,7 +53,7 @@ namespace BlockBadWifi
                 MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
                 return;
             }
-            netsh.BlockNetwork((NetworkModel)networkList.SelectedItem);
+            netsh.BlockNetwork((NetworkViewModel)networkList.SelectedItem);
             CopyFilterList();
             RefreshNetworkList();
         }
@@ -65,7 +65,7 @@ namespace BlockBadWifi
                 MessageBox.Show(Properties.Resources.Error_ChosseUnblockNetwork, Properties.Resources.Error);
                 return;
             }
-            netsh.UnblockNetwork((NetworkModel)userBlockList.SelectedItem);
+            netsh.UnblockNetwork((NetworkViewModel)userBlockList.SelectedItem);
             CopyFilterList();
             RefreshNetworkList();
         }
@@ -73,7 +73,7 @@ namespace BlockBadWifi
         public void CopyFilterList()
         { 
             userBlockNetworks.Clear();
-            foreach (var n in netsh.UserBlockNetworks) userBlockNetworks.Add(n);
+            foreach (var n in netsh.UserBlockNetworks) userBlockNetworks.Add(new NetworkViewModel(n));
         }
 
         private void RefreshFilterList()
@@ -86,7 +86,7 @@ namespace BlockBadWifi
         {
             networks.Clear();
             manager.RefreshNetworkInfomations();
-            foreach (var n in manager.NetworkModels) networks.Add(n);
+            foreach (var n in manager.NetworkModels) networks.Add(new NetworkViewModel(n));
         }
 
         private async Task ScanAndRefreshNetworkList()
