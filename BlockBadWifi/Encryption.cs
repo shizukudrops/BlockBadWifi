@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace BlockBadWifi
 {
-    public enum NetworkType
+    public enum Encryption
     {
         Undefined = 0,
-        Infrastructure = 1,
-        Adhoc = 2
+        None,
+        CCMP,
+        TKIP,
+        WEP,
+        WEP_40,
+        WEP_104,
+        Other
     }
 }

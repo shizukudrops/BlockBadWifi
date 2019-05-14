@@ -34,7 +34,7 @@ namespace BlockBadWifi
                 MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
                 return;
             }
-            var networkType = (NetworkType)networktypeComboBox.SelectedIndex;
+            var networkType = (NetworkType)networktypeComboBox.SelectedIndex + 1;
             Netsh.BlockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
             MainWindow.CopyFilterList();
             MainWindow.RefreshNetworkList();
@@ -48,7 +48,7 @@ namespace BlockBadWifi
                 MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
                 return;
             }
-            var networkType = (NetworkType)networktypeComboBox.SelectedIndex;
+            var networkType = (NetworkType)networktypeComboBox.SelectedIndex + 1;
             Netsh.UnblockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
             MainWindow.CopyFilterList();
             MainWindow.RefreshNetworkList();

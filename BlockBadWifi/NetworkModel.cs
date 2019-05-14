@@ -10,8 +10,8 @@ namespace BlockBadWifi
     {
         public string Ssid { get; set; }
         public NetworkType NetworkType { get; set; }
-        public string Authentication { get; set; }
-        public string Encryption { get; set; }
+        public Authentication Authentication { get; set; }
+        public Encryption Encryption { get; set; }
 
         public override string ToString()
         {
