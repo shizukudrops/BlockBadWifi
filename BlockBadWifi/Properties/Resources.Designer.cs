@@ -281,7 +281,7 @@ namespace BlockBadWifi.Properties {
         /// </summary>
         public static string WPA_Enterprise {
             get {
-                return ResourceManager.GetString("WPA-Enterprise", resourceCulture);
+                return ResourceManager.GetString("WPA_Enterprise", resourceCulture);
             }
         }
         
@@ -290,7 +290,7 @@ namespace BlockBadWifi.Properties {
         /// </summary>
         public static string WPA_Personal {
             get {
-                return ResourceManager.GetString("WPA-Personal", resourceCulture);
+                return ResourceManager.GetString("WPA_Personal", resourceCulture);
             }
         }
         
@@ -299,7 +299,7 @@ namespace BlockBadWifi.Properties {
         /// </summary>
         public static string WPA2_Enterprise {
             get {
-                return ResourceManager.GetString("WPA2-Enterprise", resourceCulture);
+                return ResourceManager.GetString("WPA2_Enterprise", resourceCulture);
             }
         }
         
@@ -308,7 +308,7 @@ namespace BlockBadWifi.Properties {
         /// </summary>
         public static string WPA2_Personal {
             get {
-                return ResourceManager.GetString("WPA2-Personal", resourceCulture);
+                return ResourceManager.GetString("WPA2_Personal", resourceCulture);
             }
         }
     }

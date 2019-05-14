@@ -189,16 +189,16 @@
   <data name="Unblock" xml:space="preserve">
     <value>ブロックを解除</value>
   </data>
-  <data name="WPA-Enterprise" xml:space="preserve">
+  <data name="WPA_Enterprise" xml:space="preserve">
     <value>WPA-エンタープライズ</value>
   </data>
-  <data name="WPA-Personal" xml:space="preserve">
+  <data name="WPA_Personal" xml:space="preserve">
     <value>WPA-パーソナル</value>
   </data>
-  <data name="WPA2-Enterprise" xml:space="preserve">
+  <data name="WPA2_Enterprise" xml:space="preserve">
     <value>WPA2-エンタープライズ</value>
   </data>
-  <data name="WPA2-Personal" xml:space="preserve">
+  <data name="WPA2_Personal" xml:space="preserve">
     <value>WPA2-パーソナル</value>
   </data>
 </root>
