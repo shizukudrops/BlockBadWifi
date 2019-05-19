@@ -27,7 +27,10 @@ namespace BlockBadWifi
 
         public Netsh() { }
 
-        public void RefreshFilters()
+        /// <summary>
+        /// コマンドを発行しWindowsが保有するフィルタのリストを取得する
+        /// </summary>
+        public void FetchFilters()
         {
             Execute($@"/c chcp {codePage} & netsh wlan show filters");
             try
@@ -43,13 +46,13 @@ namespace BlockBadWifi
         public void BlockNetwork(NetworkModel network)
         {
             Execute($@"/c chcp {codePage} & netsh wlan add filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
-            RefreshFilters();
+            FetchFilters();
         }
 
         public void UnblockNetwork(NetworkModel network)
         {
             Execute($@"/c chcp {codePage} & netsh wlan delete filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
-            RefreshFilters();
+            FetchFilters();
         }
 
         void Execute(string args, bool runas = false)

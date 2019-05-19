@@ -10,7 +10,6 @@ namespace BlockBadWifi
 {
     class NativeWifiManager
     {
-        private List<AvailableNetworkPack> networks;
         private List<NetworkModel> networkModels = new List<NetworkModel>();
 
         public IEnumerable<NetworkModel> NetworkModels
@@ -23,11 +22,14 @@ namespace BlockBadWifi
             return NativeWifi.ScanNetworksAsync(TimeSpan.FromMilliseconds(3000));
         }
 
+        /// <summary>
+        /// Windowsが保持するwifiネットワークのリストを取得する
+        /// </summary>
         public void RefreshNetworkInfomations()
         {
             networkModels.Clear();
             
-            networks = NativeWifi.EnumerateAvailableNetworks().ToList();         
+            var networks = NativeWifi.EnumerateAvailableNetworks().ToList();         
 
             foreach (var e in networks)
             {
@@ -55,6 +57,10 @@ namespace BlockBadWifi
                     Encryption = encryption
                 });
             }
+
+#if DEBUG
+            AddTestDataOfNetworks();
+#endif
         }
 
         Authentication ConvertAuthAlgorithm(AuthAlgorithm algo)
@@ -129,5 +135,48 @@ namespace BlockBadWifi
 
             return Encryption.Undefined;
         }
+
+        #region Test
+
+        private void AddTestDataOfNetworks()
+        {
+            NetworkModel[] testData =
+            {
+                new NetworkModel()
+                {
+                    Ssid = "testtest",
+                    Authentication = Authentication.SharedKey,
+                    Encryption = Encryption.WEP_104,
+                    NetworkType = NetworkType.Infrastructure
+                },
+                new NetworkModel()
+                {
+                    Ssid = "てすとてすと",
+                    Authentication = Authentication.Other,
+                    Encryption = Encryption.WEP_40
+                    
+                },
+                new NetworkModel()
+                {
+                    Ssid="testtest*+=~?",
+                    Encryption = Encryption.TKIP
+                },
+                new NetworkModel()
+                {
+                    Ssid="test test test",
+                    Encryption = Encryption.Other
+                },
+                new NetworkModel()
+                {
+                    Ssid="\0\0\0\0\0\0",
+                    Encryption = Encryption.Undefined,
+                    NetworkType = NetworkType.Adhoc
+                }
+            };
+
+            networkModels.AddRange(testData);
+        }
+
+        #endregion
     }
 }

@@ -60,7 +60,7 @@ namespace BlockBadWifi
                 MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
                 return;
             }
-            else if (Regex.IsMatch(selectedItem.Ssid, "\0*"))
+            else if (Regex.IsMatch(selectedItem.Ssid, "\0+"))
             {
                 MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
                 return;
@@ -82,23 +82,24 @@ namespace BlockBadWifi
             RefreshNetworkList();
         }
 
+        /// <summary>
+        /// モデルのブロックされているネットワークのリストをビューに反映させる
+        /// </summary>
         public void CopyFilterList()
-        { 
-            userBlockNetworks.Clear();
-            foreach (var n in netsh.UserBlockNetworks) userBlockNetworks.Add(new NetworkViewModel(n));
+        {
+            userBlockNetworks.Replace(netsh.UserBlockNetworks.Select(n => new NetworkViewModel(n)));
         }
 
         private void RefreshFilterList()
         {
-            netsh.RefreshFilters();
+            netsh.FetchFilters();
             CopyFilterList();
         }
 
         public void RefreshNetworkList()
         {
-            networks.Clear();
             manager.RefreshNetworkInfomations();
-            foreach (var n in manager.NetworkModels) networks.Add(new NetworkViewModel(n));
+            networks.Replace(manager.NetworkModels.Select(n => new NetworkViewModel(n)));
         }
 
         private async Task ScanAndRefreshNetworkList()
