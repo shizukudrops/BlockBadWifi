@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace BlockBadWifi
 {
@@ -49,12 +50,17 @@ namespace BlockBadWifi
         private void Button_Block_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = networkList.SelectedItem as NetworkViewModel;
-            if(selectedItem == null)
+            if (selectedItem == null)
             {
                 MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(selectedItem.Ssid))
+            else if (string.IsNullOrWhiteSpace(selectedItem.Ssid))
+            {
+                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
+                return;
+            }
+            else if (Regex.IsMatch(selectedItem.Ssid, "\0*"))
             {
                 MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
                 return;
