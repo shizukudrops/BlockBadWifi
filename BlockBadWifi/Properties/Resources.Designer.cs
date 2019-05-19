@@ -169,6 +169,15 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   The SSID of the selected network is invalid に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error_InvalidSsid {
+            get {
+                return ResourceManager.GetString("Error_InvalidSsid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Infrastructure に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Infrastructure {

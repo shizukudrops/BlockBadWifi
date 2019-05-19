@@ -216,4 +216,7 @@
   <data name="WEP_40" xml:space="preserve">
     <value>WEP(40ビット鍵)</value>
   </data>
+  <data name="Error_InvalidSsid" xml:space="preserve">
+    <value>選択したネットワークのSSIDが無効です</value>
+  </data>
 </root>

@@ -48,12 +48,18 @@ namespace BlockBadWifi
 
         private void Button_Block_Click(object sender, RoutedEventArgs e)
         {
-            if(networkList.SelectedItem == null)
+            var selectedItem = networkList.SelectedItem as NetworkViewModel;
+            if(selectedItem == null)
             {
                 MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
                 return;
             }
-            netsh.BlockNetwork((NetworkViewModel)networkList.SelectedItem);
+            else if(string.IsNullOrWhiteSpace(selectedItem.Ssid))
+            {
+                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
+                return;
+            }
+            netsh.BlockNetwork(selectedItem);
             CopyFilterList();
             RefreshNetworkList();
         }
