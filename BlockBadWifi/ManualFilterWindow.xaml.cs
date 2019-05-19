@@ -19,7 +19,6 @@ namespace BlockBadWifi
     /// </summary>
     public partial class ManualFilterWindow : Window
     {
-        public Netsh Netsh { get; set; }
         public MainWindow MainWindow { get; set; }
 
         public ManualFilterWindow()
@@ -27,31 +26,34 @@ namespace BlockBadWifi
             InitializeComponent();
         }
 
-        private void Button_Block_Click(object sender, RoutedEventArgs e)
-        {
-            if(string.IsNullOrWhiteSpace(ssidTextBox.Text) || networktypeComboBox.Text == "")
-            {
-                MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
-                return;
-            }
-            var networkType = (NetworkType)networktypeComboBox.SelectedIndex + 1;
-            Netsh.BlockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
-            MainWindow.CopyFilterList();
-            MainWindow.RefreshNetworkList();
-            Close();
-        }
+        #region MyMethods
 
-        private void Button_Unblock_Click(object sender, RoutedEventArgs e)
+        private void BlockOrUnblockNetwork(bool block)
         {
             if (string.IsNullOrWhiteSpace(ssidTextBox.Text) || networktypeComboBox.Text == "")
             {
                 MessageBox.Show(Properties.Resources.Error_FillAll, Properties.Resources.Error);
                 return;
             }
+
             var networkType = (NetworkType)networktypeComboBox.SelectedIndex + 1;
-            Netsh.UnblockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType });
-            MainWindow.CopyFilterList();
-            MainWindow.RefreshNetworkList();
+
+            MainWindow.BlockOrUnblockNetwork(new NetworkModel { Ssid = ssidTextBox.Text, NetworkType = networkType }, block);
+        }
+
+        #endregion
+
+        private void Button_Block_Click(object sender, RoutedEventArgs e)
+        {
+            BlockOrUnblockNetwork(true);
+
+            Close();
+        }
+
+        private void Button_Unblock_Click(object sender, RoutedEventArgs e)
+        {
+            BlockOrUnblockNetwork(false);
+
             Close();
         }
 

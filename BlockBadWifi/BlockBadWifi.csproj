@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="NativeWifiManager.cs" />
     <Compile Include="Netsh.cs" />
+    <Compile Include="NetshellErrors.cs" />
     <Compile Include="NetworkModel.cs" />
     <Compile Include="NetworkType.cs" />
     <Compile Include="NetworkViewModel.cs" />

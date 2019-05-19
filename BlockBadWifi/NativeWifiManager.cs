@@ -164,7 +164,8 @@ namespace BlockBadWifi
                 new NetworkModel()
                 {
                     Ssid="test test test",
-                    Encryption = Encryption.Other
+                    Encryption = Encryption.Other,
+                    NetworkType = NetworkType.Infrastructure
                 },
                 new NetworkModel()
                 {

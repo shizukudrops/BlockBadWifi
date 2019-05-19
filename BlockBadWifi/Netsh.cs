@@ -43,19 +43,44 @@ namespace BlockBadWifi
             }
         }
 
-        public void BlockNetwork(NetworkModel network)
+        public NetshellErrors BlockOrUnblockNetworks(NetworkModel network, bool block)
         {
-            Execute($@"/c chcp {codePage} & netsh wlan add filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
-            FetchFilters();
+            var addOrDelete = "";
+
+            if (block) addOrDelete = "add";
+            else addOrDelete = "delete";
+
+            if (Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true))
+            {
+                switch (ValidateOutput())
+                {
+                    case NetshellErrors.SuccessOrUndefinedError:
+                        FetchFilters();
+                        return NetshellErrors.SuccessOrUndefinedError;
+
+                    case NetshellErrors.ParametersIncorrectOrMissing:
+                        return NetshellErrors.ParametersIncorrectOrMissing;
+                }
+            }
+
+            return NetshellErrors.Undefined;
         }
 
-        public void UnblockNetwork(NetworkModel network)
+        private NetshellErrors ValidateOutput()
         {
-            Execute($@"/c chcp {codePage} & netsh wlan delete filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
-            FetchFilters();
+            var target = output.ToString();
+
+            if(target.Contains("One or more parameters for the command are not correct or missing"))
+            {
+                return NetshellErrors.ParametersIncorrectOrMissing;
+            }
+            else
+            {
+                return NetshellErrors.SuccessOrUndefinedError;
+            }
         }
 
-        void Execute(string args, bool runas = false)
+        private bool Execute(string args, bool runas = false)
         {
             output.Clear();
             error.Clear();
@@ -96,11 +121,14 @@ namespace BlockBadWifi
 
                     outputAndErrorLog.Append(output);
                     outputAndErrorLog.Append(error);
+
+                    return true;
                 }
             }
             catch (Exception)
             {
                 outputAndErrorLog.AppendLine("[Exception]NetShellコマンドの実行で例外が発生しました");
+                return false;
             }   
         }
 

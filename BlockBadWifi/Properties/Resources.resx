@@ -219,4 +219,7 @@
   <data name="Error_InvalidSsid" xml:space="preserve">
     <value>The SSID of the selected network is invalid</value>
   </data>
+  <data name="Error_InvalidSsidOrNetworkType" xml:space="preserve">
+    <value>The SSID or Network Type of the selected network is invalid</value>
+  </data>
 </root>

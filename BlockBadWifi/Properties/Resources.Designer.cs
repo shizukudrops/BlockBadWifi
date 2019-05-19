@@ -178,6 +178,15 @@ namespace BlockBadWifi.Properties {
         }
         
         /// <summary>
+        ///   The SSID or Network Type of the selected network is invalid に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Error_InvalidSsidOrNetworkType {
+            get {
+                return ResourceManager.GetString("Error_InvalidSsidOrNetworkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Infrastructure に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Infrastructure {

@@ -47,40 +47,7 @@ namespace BlockBadWifi
             };
         }
 
-        private void Button_Block_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedItem = networkList.SelectedItem as NetworkViewModel;
-            if (selectedItem == null)
-            {
-                MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
-                return;
-            }
-            else if (string.IsNullOrWhiteSpace(selectedItem.Ssid))
-            {
-                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
-                return;
-            }
-            else if (Regex.IsMatch(selectedItem.Ssid, "\0+"))
-            {
-                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
-                return;
-            }
-            netsh.BlockNetwork(selectedItem);
-            CopyFilterList();
-            RefreshNetworkList();
-        }
-
-        private void Button_Unblock_Click(object sender, RoutedEventArgs e)
-        {
-            if(userBlockList.SelectedItem == null)
-            {
-                MessageBox.Show(Properties.Resources.Error_ChosseUnblockNetwork, Properties.Resources.Error);
-                return;
-            }
-            netsh.UnblockNetwork((NetworkViewModel)userBlockList.SelectedItem);
-            CopyFilterList();
-            RefreshNetworkList();
-        }
+        #region MyMethods
 
         /// <summary>
         /// モデルのブロックされているネットワークのリストをビューに反映させる
@@ -108,6 +75,57 @@ namespace BlockBadWifi
             RefreshNetworkList();
         }
 
+        public void BlockOrUnblockNetwork(NetworkModel network, bool block)
+        {
+            switch (netsh.BlockOrUnblockNetworks(network, block))
+            {
+                case NetshellErrors.SuccessOrUndefinedError:
+                    CopyFilterList();
+                    RefreshNetworkList();
+                    break;
+
+                case NetshellErrors.ParametersIncorrectOrMissing:
+                    MessageBox.Show(Properties.Resources.Error_InvalidSsidOrNetworkType, Properties.Resources.Error);
+                    break;
+            }
+        }
+
+        #endregion
+
+        private void Button_Block_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = networkList.SelectedItem as NetworkViewModel;
+
+            if (selectedItem == null)
+            {
+                MessageBox.Show(Properties.Resources.Error_ChooseBlockNetwork, Properties.Resources.Error);
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(selectedItem.Ssid))
+            {
+                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
+                return;
+            }
+            else if (Regex.IsMatch(selectedItem.Ssid, "\0+"))
+            {
+                MessageBox.Show(Properties.Resources.Error_InvalidSsid, Properties.Resources.Error);
+                return;
+            }
+
+            BlockOrUnblockNetwork(selectedItem, true);
+        }
+
+        private void Button_Unblock_Click(object sender, RoutedEventArgs e)
+        {
+            if(userBlockList.SelectedItem == null)
+            {
+                MessageBox.Show(Properties.Resources.Error_ChosseUnblockNetwork, Properties.Resources.Error);
+                return;
+            }
+
+            BlockOrUnblockNetwork((NetworkViewModel)userBlockList.SelectedItem, false);
+        }
+
         private async void MenuItem_Refresh_Click(object sender, RoutedEventArgs e)
         {
             await ScanAndRefreshNetworkList();
@@ -118,7 +136,6 @@ namespace BlockBadWifi
         {
             var window = new ManualFilterWindow
             {
-                Netsh = netsh,
                 MainWindow = this
             };
             window.Show();
