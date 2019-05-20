@@ -26,111 +26,83 @@ namespace BlockBadWifi
         {
             networkModels.Clear();
             
-            var networks = NativeWifi.EnumerateAvailableNetworks().ToList();         
+            var networks = NativeWifi.EnumerateAvailableNetworks().ToList();
 
-            foreach (var e in networks)
+            networkModels.AddRange(networks.Select(e => new NetworkModel()
             {
-                var networkType = NetworkType.Undefined;
-                var authentication = Authentication.Undefined;
-                var encryption = Encryption.Undefined;
-
-                switch (e.BssType) {
-                    case BssType.Infrastructure:
-                        networkType = NetworkType.Infrastructure;
-                        break;
-                    case BssType.Independent:
-                        networkType = NetworkType.Adhoc;
-                        break;
-                }
-
-                authentication = ConvertAuthAlgorithm(e.AuthAlgorithm);
-                encryption = ConvertCipherAlgorithm(e.CipherAlgorithm);
-
-                networkModels.Add(new NetworkModel()
-                {
-                    Ssid = Encoding.UTF8.GetString(e.Ssid.ToBytes()),
-                    NetworkType = networkType,
-                    Authentication = authentication,
-                    Encryption = encryption
-                });
-            }
+                Ssid = Encoding.UTF8.GetString(e.Ssid.ToBytes()),
+                NetworkType = ConvertBssType(e.BssType),
+                Authentication = ConvertAuthAlgorithm(e.AuthAlgorithm),
+                Encryption = ConvertCipherAlgorithm(e.CipherAlgorithm)
+            }));
 
 #if DEBUG
             AddTestDataOfNetworks();
 #endif
         }
 
+        NetworkType ConvertBssType(BssType type)
+        {
+            return type switch
+            {
+                BssType.Infrastructure => NetworkType.Infrastructure,
+                BssType.Independent => NetworkType.Adhoc,
+                _ => NetworkType.Undefined
+            };
+        }
+
         Authentication ConvertAuthAlgorithm(AuthAlgorithm algo)
         {
-            switch (algo)
+            return algo switch
             {
-                case AuthAlgorithm.Open:
-                    return Authentication.Open;
+                AuthAlgorithm.Open => Authentication.Open,
 
-                case AuthAlgorithm.SharedKey:
-                    return Authentication.SharedKey;
+                AuthAlgorithm.SharedKey => Authentication.SharedKey,
 
-                case AuthAlgorithm.WPA:
-                    return Authentication.WPA_Enterprise;
-                    
-                case AuthAlgorithm.WPA_NONE:
-                    return Authentication.Other;
-                    
-                case AuthAlgorithm.WPA_PSK:
-                    return Authentication.WPA_Personal;
-                    
-                case AuthAlgorithm.RSNA:
-                    return Authentication.WPA2_Enterprise;
-                    
-                case AuthAlgorithm.RSNA_PSK:
-                    return Authentication.WPA2_Personal;
-                    
-                case AuthAlgorithm.IHV_START:
-                    return Authentication.Other;
-                    
-                case AuthAlgorithm.IHV_END:
-                    return Authentication.Other;
-            }
+                AuthAlgorithm.WPA => Authentication.WPA_Enterprise,
 
-            return Authentication.Undefined;
+                AuthAlgorithm.WPA_NONE => Authentication.Other,
+
+                AuthAlgorithm.WPA_PSK => Authentication.WPA_Personal,
+
+                AuthAlgorithm.RSNA => Authentication.WPA2_Enterprise,
+
+                AuthAlgorithm.RSNA_PSK => Authentication.WPA2_Personal,
+
+                AuthAlgorithm.IHV_START => Authentication.Other,
+
+                AuthAlgorithm.IHV_END => Authentication.Other,
+
+                _ => Authentication.Undefined
+            };
         }
 
         Encryption ConvertCipherAlgorithm(CipherAlgorithm algo)
         {
-            switch (algo)
+            return algo switch
             {
-                case CipherAlgorithm.None:
-                    return Encryption.None;
-                    
-                case CipherAlgorithm.CCMP:
-                    return Encryption.CCMP;
-                    
-                case CipherAlgorithm.TKIP:
-                    return Encryption.TKIP;
-                    
-                case CipherAlgorithm.WEP:
-                    return Encryption.WEP;
-                    
-                case CipherAlgorithm.WEP40:
-                    return Encryption.WEP_40;
-                    
-                case CipherAlgorithm.WEP104:
-                    return Encryption.WEP_104;
-                    
-                case CipherAlgorithm.WPA_USE_GROUP:
-                    return Encryption.Other;
-                    
-                case CipherAlgorithm.RSN_USE_GROUP:
-                    return Encryption.Other;
-                    
-                case CipherAlgorithm.IHV_START:
-                    return Encryption.Other;
-                    
-                case CipherAlgorithm.IHV_END:
-                    return Encryption.Other;
-            }
+                CipherAlgorithm.None => Encryption.None,
 
-            return Encryption.Undefined;
+                CipherAlgorithm.CCMP => Encryption.CCMP,
+
+                CipherAlgorithm.TKIP => Encryption.TKIP,
+
+                CipherAlgorithm.WEP => Encryption.WEP,
+
+                CipherAlgorithm.WEP40 => Encryption.WEP_40,
+
+                CipherAlgorithm.WEP104 => Encryption.WEP_104,
+
+                CipherAlgorithm.WPA_USE_GROUP => Encryption.Other,
+
+                CipherAlgorithm.RSN_USE_GROUP => Encryption.Other,
+
+                CipherAlgorithm.IHV_START => Encryption.Other,
+
+                CipherAlgorithm.IHV_END => Encryption.Other,
+
+                _ => Encryption.Undefined
+            };
         }
 
         #region Test
