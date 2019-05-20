@@ -26,16 +26,13 @@ namespace BlockBadWifi
         {
             var result = Execute($@"/c chcp {codePage} & netsh wlan show filters");
 
-            if (result.success)
+            try
             {
-                try
-                {
-                    userBlockNetworks = StdOutputParser.UserBlockList(result.output.ToString()).ToList();
-                }
-                catch (Exception)
-                {
-                    outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
-                }
+                userBlockNetworks = StdOutputParser.UserBlockList(result.output.ToString()).ToList();
+            }
+            catch (Exception)
+            {
+                outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
             }
         }
 
@@ -48,17 +45,14 @@ namespace BlockBadWifi
 
             var result = Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
 
-            if (result.success)
+            switch (ValidateOutput(result.output))
             {
-                switch (ValidateOutput(result.output))
-                {
-                    case NetshellErrors.SuccessOrUndefinedError:
-                        FetchFilters();
-                        return NetshellErrors.SuccessOrUndefinedError;
+                case NetshellErrors.SuccessOrUndefinedError:
+                    FetchFilters();
+                    return NetshellErrors.SuccessOrUndefinedError;
 
-                    case NetshellErrors.ParametersIncorrectOrMissing:
-                        return NetshellErrors.ParametersIncorrectOrMissing;
-                }
+                case NetshellErrors.ParametersIncorrectOrMissing:
+                    return NetshellErrors.ParametersIncorrectOrMissing;
             }
 
             return NetshellErrors.Undefined;
@@ -76,7 +70,7 @@ namespace BlockBadWifi
             }
         }
 
-        private (string output, string error, bool success) Execute(string args, bool runas = false)
+        private (string output, string error) Execute(string args, bool runas = false)
         {
             var output = new StringBuilder();
             var error = new StringBuilder();
@@ -118,14 +112,14 @@ namespace BlockBadWifi
                     outputAndErrorLog.Append(output);
                     outputAndErrorLog.Append(error);
 
-                    return (output.ToString(), error.ToString(), true);
+                    return (output.ToString(), error.ToString());
                 }
             }
             catch (Exception)
             {
                 outputAndErrorLog.AppendLine("[Exception]NetShellコマンドの実行で例外が発生しました");
-                return (output.ToString(), error.ToString(), false);
-            }   
+                return (output.ToString(), error.ToString());
+            }
         }
     }
 }
