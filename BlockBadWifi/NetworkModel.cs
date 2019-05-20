@@ -15,12 +15,12 @@ namespace BlockBadWifi
 
         public NetworkModel() { }
 
-        public NetworkModel(NetworkModel model)
+        public NetworkModel(NetworkModel network)
         {
-            Ssid = model.Ssid;
-            NetworkType = model.NetworkType;
-            Authentication = model.Authentication;
-            Encryption = model.Encryption;
+            Ssid = network.Ssid;
+            NetworkType = network.NetworkType;
+            Authentication = network.Authentication;
+            Encryption = network.Encryption;
         }
 
         public override string ToString()

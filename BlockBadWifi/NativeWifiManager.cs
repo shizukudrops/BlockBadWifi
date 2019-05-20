@@ -12,10 +12,7 @@ namespace BlockBadWifi
     {
         private List<NetworkModel> networkModels = new List<NetworkModel>();
 
-        public IEnumerable<NetworkModel> NetworkModels
-        {
-            get => networkModels;
-        }
+        public IEnumerable<NetworkModel> NetworkModels => networkModels;
 
         public Task ScanNetworks()
         {
@@ -169,7 +166,7 @@ namespace BlockBadWifi
                 },
                 new NetworkModel()
                 {
-                    Ssid="\0\0\0\0\0\0",
+                    Ssid="\0\0\0\0\0\0abcabc",
                     Encryption = Encryption.Undefined,
                     NetworkType = NetworkType.Adhoc
                 }

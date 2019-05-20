@@ -10,20 +10,12 @@ namespace BlockBadWifi
     public class Netsh
     {
         private readonly int codePage = 65001;
-        private StringBuilder outputAndErrorLog = new StringBuilder();
-        private StringBuilder output = new StringBuilder();
-        private StringBuilder error = new StringBuilder();
         private List<NetworkModel> userBlockNetworks = new List<NetworkModel>();
+        private readonly StringBuilder outputAndErrorLog = new StringBuilder();
 
-        public IEnumerable<NetworkModel> UserBlockNetworks
-        {
-            get => userBlockNetworks;
-        }
+        public IEnumerable<NetworkModel> UserBlockNetworks => userBlockNetworks;
 
-        public string OutputAndErrorLog
-        {
-            get => outputAndErrorLog.ToString();
-        }
+        public string OutputAndErrorLog => outputAndErrorLog.ToString();
 
         public Netsh() { }
 
@@ -32,27 +24,33 @@ namespace BlockBadWifi
         /// </summary>
         public void FetchFilters()
         {
-            Execute($@"/c chcp {codePage} & netsh wlan show filters");
-            try
+            var result = Execute($@"/c chcp {codePage} & netsh wlan show filters");
+
+            if (result.success)
             {
-                userBlockNetworks = StdOutputParser.UserBlockList(output.ToString()).ToList();
-            }
-            catch (Exception)
-            {
-                outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
+                try
+                {
+                    userBlockNetworks = StdOutputParser.UserBlockList(result.output.ToString()).ToList();
+                }
+                catch (Exception)
+                {
+                    outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
+                }
             }
         }
 
         public NetshellErrors BlockOrUnblockNetworks(NetworkModel network, bool block)
         {
-            var addOrDelete = "";
+            string addOrDelete;
 
             if (block) addOrDelete = "add";
             else addOrDelete = "delete";
 
-            if (Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true))
+            var result = Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
+
+            if (result.success)
             {
-                switch (ValidateOutput())
+                switch (ValidateOutput(result.output))
                 {
                     case NetshellErrors.SuccessOrUndefinedError:
                         FetchFilters();
@@ -66,11 +64,9 @@ namespace BlockBadWifi
             return NetshellErrors.Undefined;
         }
 
-        private NetshellErrors ValidateOutput()
+        private NetshellErrors ValidateOutput(string output)
         {
-            var target = output.ToString();
-
-            if(target.Contains("One or more parameters for the command are not correct or missing"))
+            if(output.Contains("One or more parameters for the command are not correct or missing"))
             {
                 return NetshellErrors.ParametersIncorrectOrMissing;
             }
@@ -80,10 +76,10 @@ namespace BlockBadWifi
             }
         }
 
-        private bool Execute(string args, bool runas = false)
+        private (string output, string error, bool success) Execute(string args, bool runas = false)
         {
-            output.Clear();
-            error.Clear();
+            var output = new StringBuilder();
+            var error = new StringBuilder();
 
             try
             {
@@ -106,10 +102,10 @@ namespace BlockBadWifi
                     p.StartInfo.FileName = Environment.GetEnvironmentVariable("ComSpec");
                     p.StartInfo.CreateNoWindow = true;
                     p.StartInfo.Arguments = args;
-                    
+
                     //OutputDataReceivedイベントハンドラを追加
-                    p.OutputDataReceived += OutputDataReceived;
-                    p.ErrorDataReceived += ErrorDataReceived;
+                    p.OutputDataReceived += (s, e) => output.AppendLine(e.Data);
+                    p.ErrorDataReceived += (s, e) => error.AppendLine(e.Data);
 
                     p.Start();
 
@@ -122,24 +118,14 @@ namespace BlockBadWifi
                     outputAndErrorLog.Append(output);
                     outputAndErrorLog.Append(error);
 
-                    return true;
+                    return (output.ToString(), error.ToString(), true);
                 }
             }
             catch (Exception)
             {
                 outputAndErrorLog.AppendLine("[Exception]NetShellコマンドの実行で例外が発生しました");
-                return false;
+                return (output.ToString(), error.ToString(), false);
             }   
-        }
-
-        void OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            output.AppendLine(e.Data);
-        }
-
-        void ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            error.AppendLine(e.Data);
         }
     }
 }
