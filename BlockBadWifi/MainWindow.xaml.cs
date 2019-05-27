@@ -79,7 +79,7 @@ namespace BlockBadWifi
         {
             switch (netsh.BlockOrUnblockNetworks(network, block))
             {
-                case NetshellErrors.SuccessOrUndefinedError:
+                case NetshellErrors.Success:
                     CopyFilterList();
                     RefreshNetworkList();
                     break;

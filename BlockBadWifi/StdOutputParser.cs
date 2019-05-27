@@ -9,7 +9,7 @@ namespace BlockBadWifi
 {
     public class StdOutputParser
     {
-        public static IEnumerable<NetworkModel> UserBlockList(string source)
+        public static IEnumerable<NetworkModel> ParseUserBlockList(string source)
         {
             var title = "Block list on the system (user)";
 

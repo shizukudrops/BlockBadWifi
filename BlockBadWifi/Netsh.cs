@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace BlockBadWifi
 {
@@ -20,19 +21,23 @@ namespace BlockBadWifi
         public Netsh() { }
 
         /// <summary>
-        /// コマンドを発行しWindowsが保有するフィルタのリストを取得する
+        /// コマンドを発行しWindowsが保有するフィルタのリストを取得する。
         /// </summary>
-        public void FetchFilters()
+        /// <returns>成功ならture。</returns>
+        public NetshellErrors FetchFilters()
         {
-            var result = Execute($@"/c chcp {codePage} & netsh wlan show filters");
+            var (output, error) = Execute($@"/c chcp {codePage} & netsh wlan show filters");
 
             try
             {
-                userBlockNetworks = StdOutputParser.UserBlockList(result.output.ToString()).ToList();
+                userBlockNetworks = StdOutputParser.ParseUserBlockList(output.ToString()).ToList();
+                return NetshellErrors.Success;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 outputAndErrorLog.AppendLine("[Exception]フィルタの標準出力のパースに失敗しました");
+                outputAndErrorLog.AppendLine(e.ToString());
+                return NetshellErrors.FailedToFetchFilters;
             }
         }
 
@@ -43,30 +48,33 @@ namespace BlockBadWifi
             if (block) addOrDelete = "add";
             else addOrDelete = "delete";
 
-            var result = Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
+            var (output, error) = Execute($@"/c chcp {codePage} & netsh wlan {addOrDelete} filter permission=block ssid={network.Ssid} networktype={network.NetworkType}", true);
 
-            switch (ValidateOutput(result.output))
+            var result = ValidateOutputOfManagingFilters(output);
+
+            switch (result)
             {
-                case NetshellErrors.SuccessOrUndefinedError:
-                    FetchFilters();
-                    return NetshellErrors.SuccessOrUndefinedError;
+                case NetshellErrors.Success:
+                    return FetchFilters();
 
-                case NetshellErrors.ParametersIncorrectOrMissing:
-                    return NetshellErrors.ParametersIncorrectOrMissing;
+                default:
+                    return result;
             }
-
-            return NetshellErrors.Undefined;
         }
 
-        private NetshellErrors ValidateOutput(string output)
+        private NetshellErrors ValidateOutputOfManagingFilters(string output)
         {
-            if(output.Contains("One or more parameters for the command are not correct or missing"))
+            if(Regex.IsMatch(output, "The filter is (added on|removed from) the system successfully"))
+            {
+                return NetshellErrors.Success;
+            }
+            else if(output.Contains("One or more parameters for the command are not correct or missing"))
             {
                 return NetshellErrors.ParametersIncorrectOrMissing;
             }
             else
             {
-                return NetshellErrors.SuccessOrUndefinedError;
+                return NetshellErrors.UndefinedErrorsOnManagingFilters;
             }
         }
 
@@ -115,9 +123,10 @@ namespace BlockBadWifi
                     return (output.ToString(), error.ToString());
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 outputAndErrorLog.AppendLine("[Exception]NetShellコマンドの実行で例外が発生しました");
+                outputAndErrorLog.AppendLine(e.ToString());
                 return (output.ToString(), error.ToString());
             }
         }

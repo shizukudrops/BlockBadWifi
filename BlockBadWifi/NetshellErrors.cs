@@ -9,7 +9,9 @@ namespace BlockBadWifi
     public enum NetshellErrors
     {
         Undefined = 0,
-        SuccessOrUndefinedError,
+        Success,
         ParametersIncorrectOrMissing,
+        UndefinedErrorsOnManagingFilters,
+        FailedToFetchFilters
     }
 }
